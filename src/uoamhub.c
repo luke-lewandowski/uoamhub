@@ -146,7 +146,7 @@ struct client {
     /** the domain this client is logged in */
     struct domain *domain;
     /** several flags */
-    int should_destroy:1, handshake:1, authorized:1, have_position:1;
+    uint32_t should_destroy:1, handshake:1, authorized:1, have_position:1;
     /** player info, including name and position */
     struct player_info info;
     /** chat settings */
