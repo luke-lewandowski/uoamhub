@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+# wait one second, otherwise the upgrade will say "Address already in use"
+sleep 1
+
+#DEBHELPER#

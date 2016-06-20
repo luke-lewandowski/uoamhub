@@ -1,0 +1,19 @@
+uoamhub (0.9.1) unstable; urgency=low
+
+  * use getopt() if getopt_long() is not available
+  * fixed long pid_t warnings
+  * use random() if /dev/random does not exist
+  * include netinet/in.h for FreeBSD compatibility
+  * enable SO_REUSEADDR to get rid of the "Address already in use" errors
+  * enable SO_KEEPALIVE
+  * ignore SIGPIPE and SIGALRM
+  * check password on every data packet
+  * made CC auto detection more portable
+
+ -- Max Kellermann <max@duempel.org>  Thu, 17 Feb 2005 22:18:59 +0100
+
+uoamhub (0.9) unstable; urgency=low
+
+  * initial release
+
+ -- Max Kellermann <max@duempel.org>  Fri, 24 Dec 2004 02:35:29 +0100

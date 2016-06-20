@@ -1,0 +1,17 @@
+Source: uoamhub
+Section: games
+Priority: extra
+Maintainer: Max Kellermann <max@duempel.org>
+Build-Depends: cdbs, debhelper, gcc (>= 3.3)
+Standards-Version: 3.6.1
+
+Package: uoamhub
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Dedicated server for UOAutoMap
+ uoamhub is a dedicated server for UOAutoMap. UOAutoMap is written by
+ Steve Blanding, and is an explicitly non-free map tracking tool for
+ Ultima Online, which has networking features with a proprietary,
+ undocumented protocol.
+ .
+ Home page: http://max.kellermann.name/projects/uoamhub/

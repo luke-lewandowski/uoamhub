@@ -1,0 +1,13 @@
+uoamhub AUTHORS
+===============
+
+$Id: AUTHORS 93 2004-12-23 21:36:39Z max $
+
+uoamhub was written by Max Kellermann <max@duempel.org>
+
+Kai Sassmannshausen had the idea and helped decode the protocol
+
+Thanks to
+- Steve Blanding for writing the original UOAutoMap client and server
+- the Ethereal team for their nice protocol analyzer
+- all people who helped with the testing

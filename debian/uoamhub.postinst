@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+    # add users
+    getent passwd uoamhub >/dev/null || useradd -g nogroup -d /usr/share/uoamhub -s /bin/false -c 'UOAutoMap hub user' uoamhub
+fi
+
+#DEBHELPER#

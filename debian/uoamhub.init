@@ -1,0 +1,82 @@
+#! /bin/sh
+#
+# uoamhub       Start the UOAutoMap dedicated server
+#
+# Author:	Max Kellermann <max@duempel.org>
+#
+# $Id: uoamhub.init 113 2004-12-24 01:32:02Z max $
+#
+
+set -e
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DESC="UOAutoMap Hub"
+NAME=uoamhub
+DAEMON=/usr/sbin/$NAME
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
+
+# Read config file if it is present.
+if [ -r /etc/default/$NAME ]
+then
+    . /etc/default/$NAME
+fi
+
+ARGS=
+[ -n "$PORT" ] && ARGS="$ARGS --port $PORT"
+[ -n "$CHROOT" ] && ARGS="$ARGS --chroot $CHROOT"
+[ -n "$PASSWORD" ] && ARGS="$ARGS --password $PASSWORD"
+[ -z "$USER" ] && USER=uoamhub
+[ -z "$LOGGER" ] && LOGGER="/usr/bin/logger -t uoamhub -p daemon.notice"
+
+#
+#	Function that starts the daemon/service.
+#
+d_start() {
+    start-stop-daemon --start --quiet --pidfile $PIDFILE \
+        --exec $DAEMON --user $USER \
+        -- --user $USER --logger "$LOGGER" --pidfile $PIDFILE $ARGS
+}
+
+#
+#	Function that stops the daemon/service.
+#
+d_stop() {
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE \
+        --name $NAME --user $USER --oknodo
+}
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: $NAME"
+	d_start
+	echo "."
+	;;
+  stop)
+	echo -n "Stopping $DESC: $NAME"
+	d_stop
+	echo "."
+	;;
+  restart|force-reload)
+	#
+	#	If the "reload" option is implemented, move the "force-reload"
+	#	option to the "reload" entry above. If not, "force-reload" is
+	#	just the same as "restart".
+	#
+	echo -n "Restarting $DESC: $NAME"
+	d_stop
+	sleep 2
+	d_start
+	echo "."
+	;;
+  *)
+	# echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
